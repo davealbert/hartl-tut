@@ -36,6 +36,18 @@ describe "User pages" do
 
 		it { should have_selector('h1',    text: 'Sign up') }
 		it { should have_selector('title', text: full_title('Sign up')) }
+
+		describe "when logged in" do
+			let(:user) { FactoryGirl.create(:user) }
+
+			before do
+				sign_in user
+				visit signup_path
+			end
+
+			it { should have_selector('title', text: full_title('')) }
+			it { should have_selector('h1',    text: "Welcome to the Sample App") }
+		end
 	end
 
 	describe "profile page" do

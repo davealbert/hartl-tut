@@ -2,11 +2,6 @@ require 'spec_helper'
 
 describe "User pages" do
 
-	#http://stackoverflow.com/questions/10767157/rspec-tests-for-administrative-delete-links-fail-michael-hartls-ror-3-2-tuto
-	before(:all) { 5.times { FactoryGirl.create(:user) } };
-  after(:all) { User.delete_all }
-	#^^^
-
 	subject { page }
 
 	describe "index" do
@@ -136,6 +131,8 @@ describe "User pages" do
 	end
 
 	describe "delete links" do
+		before(:all) { 30.times { FactoryGirl.create(:user) } }
+		after(:all)  { User.delete_all }
 
 		it { should_not have_link('delete') }
 

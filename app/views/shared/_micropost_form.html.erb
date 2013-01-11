@@ -1,7 +1,25 @@
 <%= form_for(@micropost) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
-  </div>
-  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<%= render 'shared/error_messages', object: f.object %>
+<div id="charCount" class="timestamp">140</div>
+<div class="field">
+  <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+</div>
+<%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>
+
+<script>
+$('#micropost_content').keyup(function() {
+  var theCount = 140-$('#micropost_content').val().length;
+  $('#charCount').html(theCount);
+
+  if (theCount <= 10 ) {
+    $('#charCount').css('color', '#D40D12');
+
+  } else if (theCount < 20 ) {
+    $('#charCount').css('color', '#5C0002');
+
+  } else {
+    $('#charCount').css('color', '#999999');
+  }
+});
+</script>
